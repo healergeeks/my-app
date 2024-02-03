@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentss</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+  </head>
+
+  <body>
+    <div id ="app1">
+      <my-Component> </my-Component>
+      <my-Component></my-Component>
+      <hr>
+      <my-Component1></my-Component1>
+      <my-Component1></my-Component1>
+      <my-Component1></my-Component1>      
+    </div>
+    <script>
+        /*Component nó giuwps chúng ta gom các mã HTml lại dể tái sử dụngcho các module tương tự 
+        Component là thành phần được vue.js biên dịch để sử lý các hình vi
+        Component có thể tái sử dụng lại 
+        chúng ta có thể sử dụng Component này như là một phần tử bên trong đối tượng vue gốc được tạo bảo New VUe
+        khai báo một Component
+        Vue.component("nameComponent",{
+            //các tùy chọn trong vue
+        })
+        khi được gọi như các thẻ bình thường như các thẻ HTML
+        <name-component> </name-component>
+        mình gọi ra bao nhiêu lần nó hiển thị báy nhiêu lần
+        */
+       Vue.component("myComponent",{
+        template: "<h1>xin chào các bạn</h1>",
+       })
+       Vue.component("myComponent1",{
+        template: '<button @click="counter ++">bạn đã click {{counter}} lần </button>',
+        data: function(){
+            return{
+              counter: 0
+            } 
+        }
+        /*nếu chúng ta khai báo data là một đối tượng duy nhất
+        data: {
+          counter: 0 
+        }
+        khi nhiều component thực hiện thao tác chọc đến dữ liệu thì nó cùng trong một dữ liệu counter
+        => nhưng VUE h không sử dụng được cách này nữa
+
+        nếu chúng ta khai báo data là một hàm
+        data: function(){
+            return{
+              counter: 0
+            } 
+        }
+        khi nhiều component thực hiện thao tác chọc đến dữ liệu thì mỗi component có một hàm data để sử lý dữ liệu
+        nên khi đó các component không cùng chung một dữ liệu 
+        */
+       })
+      
+      var vm = new Vue({
+        data: {
+          message: "Nguyen Manh Dung"
+        },
+        methods: {
+          show(){
+          }
+        }
+      })
+      vm.$mount("#app1")
+
+    </script>
+  </body>
+</html>

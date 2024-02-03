@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- cần import đúng thư viện của bạn, nếu sai thư viện vue không thể sử dụng
+     import thư viện giống như cài đặt môi trường chạy -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <button @click = "clickbtn()">click me!</button>
+      <h3>data.a  và vm.data.a </h3>
+      <h2>{{ results }}</h2>
+      <button @click = "clickbtn2()">click me!</button>
+    </div>
+    <div id = "app2">
+      <h1>{{ a }}</h1>
+    </div>
+    <script>
+      var data ={
+        a :1,
+      }
+      // new vue dùng để khởi tạo instance 
+      // instance giống như class giống id 
+      var vm = new Vue ({   
+        el: "#app",// là tên el vue sẽ điều khiển 
+        data:{ 
+          message: "hello word",
+          a: 2,
+          results: "", // nếu giá trị khởi tạo là chuỗi mà chưa có gì trị thì "" để trống kiểu số thì để  0
+          mgs: null, // nếu giá trị khơi tạo băn đầu chưa có kiểu gì cả thì có thể khởi tạo bằng null
+        },
+        methods: {
+        //khai báo phương thức ở đây
+          clickbtn(){
+            this.message="làhuasfuhausfh"// khi click làm thay đổi dữ liệu data
+          },
+          clickbtn2(){
+            if(this.a ==data.a)
+              this.results = "bằng nhau"
+            else
+              this.results = "không bằng nhau"
+          },
+        },
+      })
+      var vm2 = new Vue ({   
+        el: "#app2",// là tên el vue sẽ điều khiển 
+        data: data, // data trong instance vm2 được gán bằng data bên ngoài 
+        methods: {
+        },
+      })
+      console.log(data.a === vm2.$data.a)
+      console.log(data.a)
+      console.log(vm2.$data.a)
+
+      // thay đổi giá trị của data.a bên ngoài thì data trong instance vm2 cũng được thay đổi
+      // và ngược lại nếu thay đổi giá trị trong instance vm2 thì data bên ngoài cũng được thay đổi
+      data.a = 5
+      console.log(vm2.$data.a)
+    </script>
+  </body>
+</html>

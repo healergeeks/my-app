@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentss</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+  </head>
+
+  <body>
+    <div id ="app1">
+      <my-Component> </my-Component>
+      <my-Component></my-Component>
+      <hr>
+      <my-Component1></my-Component1>
+      <my-Component1></my-Component1>
+      <my-Component1></my-Component1>      
+    </div>
+    <script>
+       Vue.component("myComponent",{
+        template: "<h1>xin chào các bạn</h1>",
+       })
+       Vue.component("myComponent1",{
+        template: '<button @click="counter ++">bạn đã click {{counter}} lần </button>',
+        data: function(){
+          return{
+            counter: 0
+          } 
+        }
+       })
+      
+      var vm = new Vue({
+        data: {
+          message: "Nguyen Manh Dung"
+        },
+        methods: {
+          show(){
+          }
+        }
+      })
+      vm.$mount("#app1")
+
+    </script>
+  </body>
+</html>

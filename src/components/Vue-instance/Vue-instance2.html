@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <h1>{{mgs}}</h1>
+    </div>
+    <div id = "app2">
+      <h1>{{mgs}}</h1>
+      <button @click="changedInstance1">changed</button>
+    </div>
+
+    <!--$refs do Vue.js cung cấp để tạo tham chiếu đến thành phần con. 
+      Sau đó, thành phần cha có thể gọi trực tiếp các phương thức trên 
+      thành phần con bằng cách sử dụng tham chiếu này.-->
+    <div id="app3">
+      <h1 ref="theH1">{{mgs}}</h1>
+      <h1 ref="theH2">{{mgs}}</h1>
+      <button @click="show()">ref</button>
+    </div>
+    <script>
+      // khai báo 2 instance khác nhau và truy cập khác nhau dựa vào el: "#app" khác nhau
+      var vm1 = new Vue ({   
+        el: "#app1",// dùng để xắc định phần tử HTML cần sử lý hay cụ thể hơn vue được gắn vào 
+        data:{ 
+          mgs: "Nguyễn Mạnh DŨng"
+        },
+        /* data cuãng có thể khai báo biến kiểu sau theo dạng chuẩn của Es6
+        data: function(){
+          return{
+            mgs: "Nguyễn Mạnh DŨng"
+          }
+        }*/
+        methods: {
+          show(){
+            alert(" Alert showed by timer!")
+          }
+        },
+      })
+      // cách truy cập thuộc tính dữ liệu, hàm tư bên ngoài
+      setTimeout(function() {
+        vm1.mgs = "changed by timer"
+        vm1.show()
+      },3000)
+
+      var vm2 = new Vue ({   
+        el: "#app2",
+        data:{
+          mgs: "Nguyễn Quang Mạnh"
+        },
+        methods: {
+          // truy cập giữa 2 đối tượng instance với nhau có thể thay đổi  
+          changedInstance1(){
+            vm1.mgs="changrd by instance 2"
+            vm1.show() 
+          }
+        },
+      })
+      var vm3 = new Vue ({   
+        el: "#app3",
+        data:{
+          mgs: "Nguyễn Quang"
+        },
+        methods: {
+          show(){
+            this.$refs.theH1.innerText = "Nguyễn Quang Mạnh"// khi gọi refs cần có s vì có rất nhiều phần tử(đốt tượng) ử trên giống nhau 
+          }
+          /* cách truy cập ơhaafn tử con để thy đổi phần tử trong nó*/
+        },
+      })
+      console.log(vm3.$refs)// khi truy cập từ bên ngoài
+      console.log(vm3.$refs.theH1)// khi truy cập từ ngoài mà lấy ra giá trị của của thẻ đó
+      /*
+      var data = { message: 'Xin chào, tôi là Vue.js!' }
+      var vm = new Vue({
+      data: data
+      })
+      vm.message === data.message // Cho kết quả true // Thiết lập giá trị cho thuộc tính cũng ảnh hưởng đến đối tượng gốc
+      vm.message = 'Giới thiệu Vue.js' //data.message có giá trị là 'Giới thiệu Vue.js'
+      data.message = 'Công cụ lập trình với Vue.js' // vm.message có giá trị là 'Công cụ lập trình với Vue.js'
+      */
+    </script>
+  </body>
+</html>
